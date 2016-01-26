@@ -61,6 +61,14 @@ GameEngine.prototype.startInput = function () {
     console.log('Starting input');
     var that = this;
 
+    var getY = function (e) {
+        return e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+    }
+
+    var getX = function (e) {
+        return e.clientX - that.ctx.canvas.getBoundingClientRect().left;
+    }
+
     this.ctx.canvas.addEventListener("keydown", function (e) {
         switch (e.which) {
             case 32:
@@ -106,6 +114,43 @@ GameEngine.prototype.startInput = function () {
         e.preventDefault();
     }, false);
 
+    this.ctx.canvas.addEventListener("mousedown", function (e) {
+        if (e.button === 0) {
+            if (getY(e) > 750 && getY(e) < 800) {
+                if (getX(e) > 650 && getX(e) < 700) {
+                    that.block = true;
+                } else if (getX(e) > 700 && getX(e) < 750) {
+                    that.duck = true;
+                } else if (getX(e) > 750 && getX(e) < 800) {
+                    that.run = true;
+                }
+            } else if (getY(e) > 700 && getY(e) < 750) {
+                if (getX(e) > 700 && getX(e) < 750) {
+                    that.jump = true;
+                }
+            }
+        }
+    }, false);
+
+    this.ctx.canvas.addEventListener("mouseup", function (e) {
+        if (e.button === 0) {
+            if (e.button === 0) {
+                if (getY(e) > 750 && getY(e) < 800) {
+                    if (getX(e) > 650 && getX(e) < 700) {
+                        that.block = false;
+                    } else if (getX(e) > 700 && getX(e) < 750) {
+                        that.duck = false;
+                    } else if (getX(e) > 750 && getX(e) < 800) {
+                        that.run = false;
+                    }
+                } else if (getY(e) > 700 && getY(e) < 750) {
+                    if (getX(e) > 700 && getX(e) < 750) {
+                        that.jump = false;
+                    }
+                }
+            }
+        }
+    }, false);
     console.log('Input started');
 }
 
