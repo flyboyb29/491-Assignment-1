@@ -114,6 +114,44 @@ GameEngine.prototype.startInput = function () {
         e.preventDefault();
     }, false);
 
+    this.ctx.canvas.addEventListener("touchstart", function (e) {
+        if (e.button === 0) {
+            if (getY(e) > 750 && getY(e) < 800) {
+                if (getX(e) > 650 && getX(e) < 700) {
+                    that.block = true;
+                } else if (getX(e) > 700 && getX(e) < 750) {
+                    that.duck = true;
+                } else if (getX(e) > 750 && getX(e) < 800) {
+                    that.run = true;
+                }
+            } else if (getY(e) > 700 && getY(e) < 750) {
+                if (getX(e) > 700 && getX(e) < 750) {
+                    that.jump = true;
+                }
+            }
+        }
+    }, false);
+
+    this.ctx.canvas.addEventListener("touchend", function (e) {
+        if (e.button === 0) {
+            if (e.button === 0) {
+                if (getY(e) > 750 && getY(e) < 800) {
+                    if (getX(e) > 650 && getX(e) < 700) {
+                        that.block = false;
+                    } else if (getX(e) > 700 && getX(e) < 750) {
+                        that.duck = false;
+                    } else if (getX(e) > 750 && getX(e) < 800) {
+                        that.run = false;
+                    }
+                } else if (getY(e) > 700 && getY(e) < 750) {
+                    if (getX(e) > 700 && getX(e) < 750) {
+                        that.jump = false;
+                    }
+                }
+            }
+        }
+    }, false);
+
     this.ctx.canvas.addEventListener("mousedown", function (e) {
         if (e.button === 0) {
             if (getY(e) > 750 && getY(e) < 800) {
