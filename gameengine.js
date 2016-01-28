@@ -113,7 +113,7 @@ GameEngine.prototype.startInput = function () {
 
         e.preventDefault();
     }, false);
-
+    // added for mac and andriod
     this.ctx.canvas.addEventListener("touchstart", function (e) {
         if (e.button === 0) {
             if (getY(e) > 750 && getY(e) < 800) {
